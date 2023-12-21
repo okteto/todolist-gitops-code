@@ -53,7 +53,7 @@ jobs:
 
     - name: Update image tag in manifests
       run: |
-        chart_dir="charts"
+        chart_dir="charts/todolist"
         new_image_tag=${{ github.sha }}
         sed -i "/clientImage:/,/tag: /s/tag: .*/tag: $new_image_tag/" "$chart_dir/values-prod.yaml"
         sed -i "/serverImage:/,/tag: /s/tag: .*/tag: $new_image_tag/" "$chart_dir/values-prod.yaml"
