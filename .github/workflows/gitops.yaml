@@ -63,10 +63,13 @@ jobs:
 
         cd manifests
 
-        git config --global user.name 'GitHub Action'
-        git config --global user.email 'action@github.com'
+        git add .
         git commit -am "Update image tag"
-        git push using: ${{ steps.generate_token.outputs.token }}
+        git push
+      env:
+        GIT_COMMITTER_NAME: GitHub Action
+        GIT_COMMITTER_EMAIL: action@github.com
+        GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
