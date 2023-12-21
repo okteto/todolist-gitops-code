@@ -72,10 +72,17 @@ jobs:
         GIT_COMMITTER_EMAIL: action@github.com
         GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
-    - name: Wait for the branch to be available
+    - name: Verify branch existence in the remote
       run: |
-        echo "Waiting for the branch to be available in the remote repository..."
-        sleep 10  # Waits for 10 seconds
+        for i in {1..5}; do
+          if git ls-remote --heads origin update-image-${{ github.sha }} | grep -q 'update-image-${{ github.sha }}'; then
+            echo "Branch found in remote repository."
+            break
+          else
+            echo "Waiting for branch to be available in remote repository..."
+            sleep 5
+          fi
+        done
 
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
