@@ -51,6 +51,9 @@ jobs:
         token: ${{ steps.generate_token.outputs.token }}
         path: manifests
 
+    - name: List files in the charts directory
+      run: ls -lR "${{ github.workspace }}/manifests/charts/todolist"
+
     - name: Update image tag in manifests
       run: |
         chart_dir="charts/todolist"
