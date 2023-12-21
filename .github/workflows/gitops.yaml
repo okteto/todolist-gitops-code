@@ -74,14 +74,13 @@ jobs:
 
     - name: Verify branch existence in the remote
       run: |
-        for i in {1..5}; do
-          if git ls-remote --heads origin update-image-${{ github.sha }} | grep -q 'update-image-${{ github.sha }}'; then
+        for i in {1..10}; do
+          echo "Checking if the branch exists in the remote (Attempt $i)..."
+          if git ls-remote --heads origin update-image-${{ github.sha }} | grep -q 'refs/heads/update-image-${{ github.sha }}'; then
             echo "Branch found in remote repository."
             break
-          else
-            echo "Waiting for branch to be available in remote repository..."
-            sleep 5
           fi
+          sleep 6
         done
 
     - name: Create Pull Request
