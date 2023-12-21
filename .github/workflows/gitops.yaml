@@ -62,11 +62,11 @@ jobs:
         sed -i "/serverImage:/,/tag: /s/tag: .*/tag: $new_image_tag/" "$chart_dir/values-prod.yaml"
 
         cd manifests
-
+        git checkout -b update-image-${{ github.sha }}
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
         git commit -am "Update image tag"
-        git push
+        git push origin update-image-${{ github.sha }}
       env:
         GIT_COMMITTER_NAME: GitHub Action
         GIT_COMMITTER_EMAIL: action@github.com
@@ -75,7 +75,7 @@ jobs:
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
       with:
-        source_branch: "main"
+        source_branch: "update-image-${{ github.sha }}"
         destination_branch: "main"
         github_token: ${{ steps.generate_token.outputs.token }}
         pr_title: "Update image tag"
