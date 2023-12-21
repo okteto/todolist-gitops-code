@@ -72,16 +72,8 @@ jobs:
         GIT_COMMITTER_EMAIL: action@github.com
         GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
 
-    - name: Verify branch existence in the remote
-      run: |
-        for i in {1..10}; do
-          echo "Checking if the branch exists in the remote (Attempt $i)..."
-          if git ls-remote --heads origin update-image-${{ github.sha }} | grep -q 'refs/heads/update-image-${{ github.sha }}'; then
-            echo "Branch found in remote repository."
-            break
-          fi
-          sleep 6
-        done
+    - name: Fetch all branches
+      run: git fetch --all
 
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
