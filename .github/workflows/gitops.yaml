@@ -72,18 +72,3 @@ jobs:
         GIT_COMMITTER_NAME: GitHub Action
         GIT_COMMITTER_EMAIL: action@github.com
         GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
-
-    # - name: Wait for the branch to be available
-    #   run: |
-    #     echo "Waiting for the branch to be available in the remote repository..."
-    #     sleep 60  # Waits for 10 seconds
-
-    # - name: Create Pull Request
-    #   uses: repo-sync/pull-request@v2
-    #   with:
-    #     source_branch: "update-image-${{ github.sha }}"
-    #     destination_branch: "main"
-    #     github_token: ${{ steps.generate_token.outputs.token }}
-    #     pr_title: "Update image tag"
-    #     pr_body: "Automated image tag update"
-    #     pr_label: "automated-pr"
