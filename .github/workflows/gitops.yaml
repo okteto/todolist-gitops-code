@@ -67,7 +67,7 @@ jobs:
         git config --global user.email 'action@github.com'
         git commit -am "Update image tag"
         git push origin update-image-${{ github.sha }}
-        gh pr create --title "Updating the image tag"
+        gh pr create --title "Updating the image tag" --body "updating the images for the client and server microservices"
       env:
         GIT_COMMITTER_NAME: GitHub Action
         GIT_COMMITTER_EMAIL: action@github.com
