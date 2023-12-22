@@ -74,8 +74,8 @@ jobs:
 
     - name: Wait for the branch to be available
       run: |
-      echo "Waiting for the branch to be available in the remote repository..."
-      sleep 60  # Waits for 10 seconds
+        echo "Waiting for the branch to be available in the remote repository..."
+        sleep 60  # Waits for 10 seconds
 
     - name: Create Pull Request
       uses: repo-sync/pull-request@v2
