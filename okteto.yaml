@@ -11,7 +11,7 @@ deploy:
       set -e
       rm -rf todolist-gitops-manifests
       git clone https://github.com/okteto/todolist-gitops-manifests.git
-      helm upgrade --install todolist todolist-gitops-manifests/charts/todolist --set serverImage=${OKTETO_BUILD_SERVER_IMAGE} --set clientImage=${OKTETO_BUILD_CLIENT_IMAGE}
+      helm upgrade --install todolist todolist-gitops-manifests/charts/todolist --set serverImage.repository="${OKTETO_BUILD_SERVER_REGISTRY}/${OKTETO_BUILD_SERVER_REPOSITORY}" --set serverImage.tag=${OKTETO_BUILD_SERVER_SHA} --set clientImage.repository="${OKTETO_BUILD_CLIENT_REGISTRY}/${OKTETO_BUILD_CLIENT_REPOSITORY}" --set clientImage.tag=${OKTETO_BUILD_CLIENT_SHA}
       rm -rf todolist-gitops-manifests
 
 dev:
